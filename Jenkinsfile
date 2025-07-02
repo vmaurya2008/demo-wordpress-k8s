@@ -4,7 +4,7 @@ pipeline {
   environment {
     REGISTRY = "docker.io/vmaurya2008"
     APP_NAME = "wordpress"
-    VERSION = "v1.0.0"
+    VERSION = "v1.0.0${BUILD_NUMBER}"
   }
 
   stages {
@@ -28,7 +28,8 @@ pipeline {
 
     stage('Deploy to Kubernetes') {
       steps {
-        sh 'kubectl apply -f k8s/'
+        withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+          sh 'kubectl --kubeconfig=$KUBECONFIG apply -f k8s/'
       }
     }
   }
