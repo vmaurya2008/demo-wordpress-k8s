@@ -8,12 +8,6 @@ pipeline {
   }
 
   stages {
-    stage('Checkout') {
-      steps {
-        git 'https://github.com/vmaurya2008/demo-wordpress-k8s.git'
-      }
-    }
-
     stage('Build Docker Image') {
       steps {
         script {
