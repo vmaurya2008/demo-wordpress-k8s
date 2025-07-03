@@ -4,9 +4,11 @@ metadata:
   name: wordpress-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
+  ingressClassName: nginx
   rules:
-  - host: wordpress.local
+  - host: app.wordpress.vmaurya.xyz
     http:
       paths:
       - path: /
@@ -14,5 +16,16 @@ spec:
         backend:
           service:
             name: wordpress-service
+            port:
+              number: 80
+
+  - host: db.wordpress.vmaurya.xyz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: pgadmin-service
             port:
               number: 80
