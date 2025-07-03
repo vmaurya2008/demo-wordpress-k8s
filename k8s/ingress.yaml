@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: app.vmaurya.xyz
+  - host: app.vmauryaaws.xyz
     http:
       paths:
       - path: /
@@ -19,7 +19,7 @@ spec:
             port:
               number: 80
 
-  - host: db.vmaurya.xyz
+  - host: db.vmauryaaws.xyz
     http:
       paths:
       - path: /
