@@ -17,9 +17,17 @@ spec:
         image: postgres:15
         ports:
         - containerPort: 5432
-        envFrom:
-        - secretRef:
-            name: wordpress-secret
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretRef:
+              name: wordpress-secret
+              key: db_user
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: wordpress-secret
+              key: POSTGRES_PASSWORD
         volumeMounts:
         - mountPath: "/var/lib/postgresql/data"
           name: postgres-storage
