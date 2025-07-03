@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: app.wordpress.vmaurya.xyz
+  - host: app.vmaurya.xyz
     http:
       paths:
       - path: /
@@ -19,7 +19,7 @@ spec:
             port:
               number: 80
 
-  - host: db.wordpress.vmaurya.xyz
+  - host: db.vmaurya.xyz
     http:
       paths:
       - path: /
