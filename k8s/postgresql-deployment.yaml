@@ -27,7 +27,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: wordpress-secret
-              key: POSTGRES_PASSWORD
+              key: db_password
         - name: POSTGRES_DB
           value: wordpress
         - name: PGDATA
