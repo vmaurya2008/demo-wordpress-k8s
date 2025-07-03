@@ -28,6 +28,8 @@ spec:
             secretKeyRef:
               name: wordpress-secret
               key: POSTGRES_PASSWORD
+        - name: POSTGRES_DB
+          value: wordpress
         - name: PGDATA
           value: /var/lib/postgresql/data/pgdata
         volumeMounts:

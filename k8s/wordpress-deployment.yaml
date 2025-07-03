@@ -30,6 +30,8 @@ spec:
             secretKeyRef:
               name: wordpress-secret
               key: db_password
+        - name: WORDPRESS_DB_NAME
+          value: wordpress
         resources:
           requests:
             memory: "256Mi"
