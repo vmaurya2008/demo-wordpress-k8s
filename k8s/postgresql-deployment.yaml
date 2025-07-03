@@ -20,7 +20,7 @@ spec:
         env:
         - name: POSTGRES_USER
           valueFrom:
-            secretRef:
+            secretKeyRef:
               name: wordpress-secret
               key: db_user
         - name: POSTGRES_PASSWORD
