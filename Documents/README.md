@@ -104,6 +104,24 @@ kubectl set image deployment/wordpress wordpress=docker.io/vmaurya2008/wordpress
 - Jenkins has required plugins and access to Docker and Kubernetes
 - All resources run in a single namespace (e.g., `wordpress`)
 - Secrets are managed manually or through Vault/external tool
+    - We can use Sealed Secrets Controller on our Cluster.
+        - Install Sealed Secrets Controller on Cluster
+        - Steps to install and configure
+        - CMD - kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.26.3/controller.yaml
+        - Install kubeseal CLI on Your Local Machine
+        - CMD - wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.26.3/kubeseal-linux-amd64 -O kubeseal chmod +x kubeseal 
+        sudo mv kubeseal /usr/local/bin/
+        - kubectl create secret generic wordpress-secret \
+            --from-literal=db_user=user_name \
+            --from-literal=db_password=password \
+            --from-literal=PGADMIN_DEFAULT_EMAIL=admin@example.com \
+            --from-literal=PGADMIN_DEFAULT_PASSWORD=password \
+            --dry-run=client -o json > wordpress-secret.json
+        - Seal the Secret, CMD - kubeseal --format=yaml < wordpress-secret.json > sealed-wordpress-secret.yaml
+        - commit to Git.
+        -  Apply the Sealed Secret in Cluster. CMD - kubectl apply -f sealed-wordpress-secret.yaml
+
+
 
 ### Constraints
 - PostgreSQL is single-instance (no HA)
